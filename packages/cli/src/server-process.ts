@@ -85,6 +85,8 @@ const processEffect = Effect.fnUntraced(function* (options: Options) {
       const environmentPassword = yield* Env.password
       // Keep the lease credential out of the environment inherited by tools.
       if (options.mode === "stdio") {
+        delete process.env.SIALKI_PASSWORD
+        delete process.env.SIALKI_SERVER_PASSWORD
         delete process.env.OPENCODE_PASSWORD
         delete process.env.OPENCODE_SERVER_PASSWORD
       }
