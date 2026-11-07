@@ -235,6 +235,7 @@ export const SettingsProviders: Component<{
 
     const items = providers
       .popular()
+      .filter((p) => p.id !== "opencode" && p.id !== "opencode-go")
       .filter((p) => {
         if (p.id !== CONSOLE_INTEGRATION || !account) return !connectedIDs.has(p.id)
 

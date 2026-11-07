@@ -27,7 +27,7 @@ import type { Integration } from "../integration.js"
 import { ErrorSummary } from "../util/error-summary.js"
 
 /** Client ID Metadata Document: servers that support CIMD accept this URL as the client_id without registration. */
-export const CLIENT_METADATA_URL = "https://opencode.ai/oauth/opencode/client.json"
+export const CLIENT_METADATA_URL = "https://sialki.com/oauth/sialki/client.json"
 
 // Refresh tokens rotate, so concurrent refreshes of the same token share one request or the second gets invalid_grant.
 const refreshes = new Map<string, ReturnType<FetchLike>>()
@@ -191,8 +191,8 @@ const provider = (options: Options): OAuthClientProvider => {
     clientMetadata: {
       redirect_uris: [redirectUrl],
       client_name: "opencode",
-      client_uri: "https://opencode.ai",
-      logo_uri: "https://opencode.ai/web-app-manifest-512x512.png",
+      client_uri: "https://sialki.com",
+      logo_uri: "https://sialki.com/web-app-manifest-512x512.png",
       grant_types: ["authorization_code", "refresh_token"],
       response_types: ["code"],
       token_endpoint_auth_method: client?.client_secret ? "client_secret_post" : "none",

@@ -2,7 +2,7 @@ export * as ConsoleAccess from "./console-access.js"
 
 import type { Credential } from "./credential.js"
 
-export const defaultServer = "https://opencode.ai/console"
+export const defaultServer = "https://sialki.com/console"
 
 /** The OpenCode Console a credential signed in to. */
 export function server(value: Credential.Value) {
