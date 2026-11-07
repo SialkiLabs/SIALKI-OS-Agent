@@ -12,7 +12,7 @@ import type { ModelSelection } from "@/providers/models/selection"
 import { formatLimitReset } from "../usage-exceeded-dialogs"
 import { Grow } from "./spring-height"
 
-// OpenCode Console names the workspace and the limit (5 hour, weekly or monthly) in its Go usage limit refusal.
+// Sialki Console names the workspace and the limit (5 hour, weekly or monthly) in its Go usage limit refusal.
 const decodeGoLimitBody = Schema.decodeUnknownOption(
   Schema.fromJsonString(
     Schema.Struct({
@@ -31,11 +31,11 @@ function goLimit(locale: string, event: SessionStepFailed): GoLimit {
     name: metadata?.limitName,
     reset: formatLimitReset(locale, event.created, event.data.error.retryAfterMs),
     // The Go page is where the workspace turns on Extra Usage to keep going on its balance.
-    link: workspace ? `https://opencode.ai/console/${encodeURIComponent(workspace)}/go` : "https://opencode.ai/console",
+    link: workspace ? `https://sialki.com/console/${encodeURIComponent(workspace)}/go` : "https://sialki.com/console",
   }
 }
 
-// A tray that grows out from under the composer, like the queue panel, when an OpenCode Go subscriber reaches a usage
+// A tray that grows out from under the composer, like the queue panel, when a Sialki Go subscriber reaches a usage
 // limit: when Go is back, and how to keep going now.
 export function SessionGoLimitTray(props: {
   sessionID: string | undefined

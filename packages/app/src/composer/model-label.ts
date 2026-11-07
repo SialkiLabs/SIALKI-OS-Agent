@@ -43,7 +43,7 @@ export function composerProviderName(
       (item.integrationID ?? item.id) === provider.canonical,
   )
 
-  return direct ? `OpenCode / ${name}` : name
+  return direct ? `Sialki / ${name}` : name
 }
 
 export function composerModelLabels(

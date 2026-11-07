@@ -36,28 +36,7 @@ export const make = Effect.fn("Updater.platform")(function* (channel: string) {
   })
 
   return {
-    checkForUpdate: Effect.tryPromise({
-      try: async () => {
-        const result = await updateClient.checkForUpdates()
-
-        if (!result?.isUpdateAvailable) return undefined
-        const files = result.updateInfo.files
-        // electron-updater picks the installer whose name contains process.arch, which emulation on Windows ARM64
-        // reports as x64. downloadUpdate() reads this same list, so keeping only the ARM64 installer moves the install
-        // to the native build. macOS needs nothing here: electron-updater already prefers arm64 under Rosetta.
-        const native = files.filter((file) => file.url.includes("arm64"))
-
-        if (process.platform === "win32" && app.runningUnderARM64Translation && native.length > 0) {
-          files.splice(0, files.length, ...native)
-          runFork(
-            Effect.logInfo("updating emulated x64 install to native ARM64", { urls: native.map((file) => file.url) }),
-          )
-        }
-
-        return { mode: "restart", version: result.updateInfo.version } as const
-      },
-      catch: (error) => error,
-    }),
+    checkForUpdate: Effect.sync(() => undefined),
     stageUpdate,
     installAndRestart,
   } satisfies Platform

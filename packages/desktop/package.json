@@ -1,13 +1,13 @@
 {
   "name": "@opencode/desktop",
   "private": true,
-  "version": "2.2.5",
+  "version": "1.0.1",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://opencode.ai",
+  "homepage": "https://sialki.com",
   "author": {
-    "name": "OpenCode",
-    "email": "hello@opencode.ai"
+    "name": "Sialki Labs",
+    "email": "hello@sialki.com"
   },
   "scripts": {
     "typecheck": "bun check --no-script -b",

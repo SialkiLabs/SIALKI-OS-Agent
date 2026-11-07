@@ -115,7 +115,11 @@ const prepare = Effect.fn("BackgroundService.prepare")(function* (mode: Backgrou
           "opencode",
           "service-local.json",
         )
-      : undefined
+      : path.join(
+          process.env.XDG_STATE_HOME ?? path.join(app.getPath("home"), ".local", "state"),
+          "opencode",
+          "service.json",
+        )
 
   return { cli, client, file, isolated, version }
 })

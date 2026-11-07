@@ -206,9 +206,9 @@ export default { path: file, version: ${JSON.stringify(opencodePty.version)}, sh
       windows: {},
     },
     define: {
-      OPENCODE_VERSION: `'${Script.version}'`,
-      OPENCODE_CLI_NAME: "'opencode'",
-      OPENCODE_CHANNEL: `'${Script.channel}'`,
+      OPENCODE_VERSION: "'1.0.1'",
+      OPENCODE_CLI_NAME: "'sialki'",
+      OPENCODE_CHANNEL: "'beta'",
       OPENCODE_ARTIFACT: `'cli'`,
       ...(highlights ? { OPENCODE_RELEASE_HIGHLIGHTS: JSON.stringify(highlights) } : {}),
       OPENCODE_LIBC: item.os === "linux" ? `'${item.abi ?? "glibc"}'` : "undefined",
@@ -230,7 +230,7 @@ export default { path: file, version: ${JSON.stringify(opencodePty.version)}, sh
     JSON.stringify(
       {
         name: `@opencode/${name}`,
-        version: Script.version,
+        version: "1.0.1",
         license: "MIT",
         repository: { type: "git", url: "git+https://github.com/anomalyco/opencode.git" },
         os: [item.os],

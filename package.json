@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "opencode",
-  "description": "AI-powered development tool",
-  "version": "2.2.5",
+  "description": "Sialki Autonomous Agent Architecture",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "packageManager": "bun@1.4.4",

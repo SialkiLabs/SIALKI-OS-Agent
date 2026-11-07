@@ -73,9 +73,9 @@ const SkillBundle = Schema.Struct({
   files: Schema.Array(Schema.Struct({ path: Schema.String, content: Schema.String })),
 })
 type LibrarySkill = { readonly skill: Skill.Info; readonly files: Record<string, string> }
-const signedOutMessage = "Reconnect OpenCode Console to continue"
+const signedOutMessage = "Reconnect Sialki Console to continue"
 const ssoMessage = (organization: string | undefined) =>
-  `Sign in with SSO again to use ${organization ?? "your OpenCode Console organization"}`
+  `Sign in with SSO again to use ${organization ?? "your Sialki Console organization"}`
 
 class SsoRequiredError extends Schema.TaggedError<SsoRequiredError>()("OpencodeConsole.SsoRequired", {
   organization: Schema.optional(Schema.String),
@@ -99,7 +99,7 @@ function oauth(http: HttpClient.HttpClient) {
     method: {
       id: methodID,
       type: "oauth",
-      label: "OpenCode Console account",
+      label: "Sialki Console account",
       form: [
         {
           key: "server",
@@ -303,7 +303,7 @@ export const OpencodePlugin = define<
         : undefined
       instructions = (library?.instructions ?? []).map(
         (item) =>
-          new InstructionDiscovery.File({ path: `OpenCode Console instruction ${item.id}`, content: item.content }),
+          new InstructionDiscovery.File({ path: `Sialki Console instruction ${item.id}`, content: item.content }),
       )
       if (!allowed) librarySkills = { owner: "", items: [] }
       // Skills download in the background, so startup and config changes never wait on them. The current ones stay
@@ -366,10 +366,10 @@ export const OpencodePlugin = define<
         Effect.gen(function* () {
           const active = yield* ctx.integration.connection.active("opencode")
           if (!active || IntegrationConnection.key(active) !== IntegrationConnection.key(connection))
-            return yield* Effect.fail(new Error("OpenCode Console connection changed"))
+            return yield* Effect.fail(new Error("Sialki Console connection changed"))
           const credential = yield* ctx.integration.connection.resolve(active)
           if (!credential || credential.type === "external")
-            return yield* Effect.fail(new Error("OpenCode Console is not connected"))
+            return yield* Effect.fail(new Error("Sialki Console is not connected"))
           const metadata = credential.metadata
           const orgID = typeof metadata?.orgID === "string" ? metadata.orgID : undefined
           const token = credential.type === "oauth" ? credential.access : credential.key
@@ -402,7 +402,7 @@ export const OpencodePlugin = define<
 
     yield* ctx.integration.transform((editor) => {
       editor.update("opencode", (integration) => {
-        integration.name = "OpenCode Console"
+        integration.name = "Sialki Console"
       })
       editor.method.update(oauth(http))
       editor.method.update({ integrationID: "opencode", method: { type: "key", label: "API key (service account)" } })
@@ -693,7 +693,7 @@ function normalizeServer(input: unknown) {
       return `${url.origin}${url.pathname.replace(/\/+$/, "")}`
     },
     catch: (cause) =>
-      new Error(`Invalid OpenCode server URL: ${cause instanceof Error ? cause.message : String(cause)}`),
+      new Error(`Invalid Sialki server URL: ${cause instanceof Error ? cause.message : String(cause)}`),
   })
 }
 

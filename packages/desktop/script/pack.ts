@@ -35,18 +35,18 @@ await mkdir(out, { recursive: true })
 if (app) {
   // The installer uses the channel's icons; the rest of the app is already built and signed.
   await $`bun ./script/copy-icons.ts ${resolveChannel()}`
-  await $`bunx electron-builder ${flags} --prepackaged ${app}`
+  await $`bun x electron-builder ${flags} --prepackaged ${app}`
   await cp(`dist/opencode-desktop-win-${cli.cpu}.exe`, path.join(out, `opencode-desktop-win-${cli.cpu}.exe`))
 }
 
 if (!app && os === "linux") {
-  await $`bunx electron-builder ${flags}`
+  await $`bun x electron-builder ${flags}`
   const files = (await readdir("dist")).filter((file) => /\.(AppImage|deb|rpm)$/.test(file))
   await Promise.all(files.map((file) => cp(path.join("dist", file), path.join(out, file))))
 }
 
 if (!app && os === "mac") {
-  await $`bunx electron-builder ${flags} --dir -c.mac.identity=null`
+  await $`bun x electron-builder ${flags} --dir -c.mac.identity=null`
   const parent = path.join("dist", cli.cpu === "arm64" ? "mac-arm64" : "mac")
   const bundles = (await readdir(parent)).filter((file) => file.endsWith(".app"))
 
@@ -56,7 +56,7 @@ if (!app && os === "mac") {
 }
 
 if (!app && os === "win") {
-  await $`bunx electron-builder ${flags} --dir`
+  await $`bun x electron-builder ${flags} --dir`
   const unpacked = path.join("dist", cli.cpu === "arm64" ? "win-arm64-unpacked" : "win-unpacked")
   await writeUpdateConfig(path.join(unpacked, "resources"))
   await cp(unpacked, path.join(out, "app"), { recursive: true })

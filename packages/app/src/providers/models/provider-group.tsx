@@ -34,7 +34,7 @@ export function ProviderModelIcon(props: { provider: ModelProvider; class?: stri
 
   return (
     <Switch>
-      <Match when={props.provider.id === "opencode"}>
+      <Match when={props.provider.id === "opencode" || props.provider.id === "opencode-go"}>
         <OpenCodeLogo class={`size-4 ${props.class ?? ""}`} />
       </Match>
       <Match when={icon()} keyed>
